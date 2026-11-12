@@ -51,7 +51,7 @@ Open source (MIT): https://github.com/zildjiean/WhatWAF
 | Category | **Developer Tools** |
 | Language | English |
 | Store icon | `icons/icon128.png` (มีขอบ 16px ตามข้อแนะนำแล้ว) |
-| Screenshots | `store/screenshot-1-detect.png`, `screenshot-2-permission.png`, `screenshot-3-honest.png` (1280×800) |
+| Screenshots | `store/screenshot-1-detect.png`, `screenshot-2-permission.png`, `screenshot-3-honest.png`, `screenshot-4-dark.png` (1280×800, v1.5 UI; popup content comes from real checks) |
 | Small promo tile | `store/promo-small-440x280.png` |
 | Marquee promo tile | ไม่ต้องใส่ (ไม่บังคับ) |
 | Homepage URL | https://github.com/zildjiean/WhatWAF |
