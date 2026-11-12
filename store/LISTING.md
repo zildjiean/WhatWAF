@@ -27,9 +27,8 @@ WAF Detector shows which web application firewall (WAF), CDN or edge service is 
 HOW IT WORKS
 Open the popup on any website. WAF Detector sends a single request to that site and compares its HTTP response headers against a built-in list of known signatures. It shows every service it recognizes, plus the exact header that identified it.
 
-RECOGNIZES 24 SERVICES, INCLUDING
-• WAF / security: Cloudflare, Imperva (Incapsula), Akamai, AWS WAF, Sucuri, F5 BIG-IP, Citrix NetScaler, Fastly Next-Gen WAF (Signal Sciences), Radware, Wallarm, Reblaze, ModSecurity, DDoS-Guard, Qrator, ArvanCloud
-• CDN / edge: AWS CloudFront, Azure Front Door, Google Cloud Load Balancer, Fastly, Edgio, Vercel, Netlify, BunnyCDN, KeyCDN
+WHAT IT RECOGNIZES
+Around two dozen widely used WAF, anti-DDoS, CDN and hosting/edge platforms. Each result is labelled by type, so you can tell a security service from a delivery network. The full, up-to-date list of supported services is published in the project's GitHub repository.
 
 PRIVACY FIRST
 • Asks for access one site at a time — no blanket access to your browsing.
@@ -37,14 +36,15 @@ PRIVACY FIRST
 • Collects nothing. No analytics, no tracking, no external servers.
 
 GOOD TO KNOW
-Detection is based on response headers. Some WAFs hide or strip their headers, so "no known signature found" does not mean a site is unprotected. CDN results (e.g. CloudFront) show the delivery network; they don't confirm that a WAF is enabled.
+Detection is based on response headers. Some WAFs hide or strip their headers, so "no known signature found" does not mean a site is unprotected. CDN results show the delivery network; they don't confirm that a WAF is enabled.
 
 Useful for security researchers, penetration testers, developers and anyone curious about how a website is protected.
 
 Open source (MIT): https://github.com/zildjiean/WhatWAF
-
-All product names are trademarks of their respective owners. WAF Detector is not affiliated with or endorsed by any of them.
 ```
+
+> ⚠️ **ห้ามใส่รายชื่อยี่ห้อใน description** — ครั้งแรกโดน reject ด้วยรหัส **Yellow Argon (keyword spam)**
+> เพราะเขียนรายชื่อ 24 ยี่ห้อเรียงกัน (2026-11-12) ให้ใส่รายชื่อเต็มไว้ใน README บน GitHub แทน
 
 | ช่อง | ค่า |
 |---|---|
