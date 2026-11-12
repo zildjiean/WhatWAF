@@ -1,0 +1,10 @@
+.DS_Store
+dist/
+
+# Not used by the extension. Third-party brand logos are kept out of the public repo.
+icon.png
+icons/akamai.png
+icons/aws.png
+icons/cloudflare.png
+icons/imperva.png
+icons/sucuri.png

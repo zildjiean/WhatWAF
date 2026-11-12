@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "WAF Detector",
+  "version": "1.4",
+  "description": "Identifies the WAF or CDN protecting the current website by inspecting its HTTP response headers.",
+  "permissions": [
+    "activeTab"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "WAF Detector",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "homepage_url": "https://github.com/zildjiean/WhatWAF"
+}
