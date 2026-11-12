@@ -6,8 +6,10 @@ cd "$(dirname "$0")"
 VERSION=$(python3 -c 'import json;print(json.load(open("manifest.json"))["version"])')
 OUT="dist/waf-detector-$VERSION.zip"
 
-FILES="manifest.json background.js wafSignatures.js popup.html popup.js
-icons/icon16.png icons/icon32.png icons/icon48.png icons/icon128.png"
+FILES="manifest.json background.js wafSignatures.js popup.html popup.css popup.js
+icons/icon16.png icons/icon32.png icons/icon48.png icons/icon128.png
+fonts/instrument-sans-latin-wght.woff2 fonts/jetbrains-mono-latin-wght.woff2
+fonts/OFL-InstrumentSans.txt fonts/OFL-JetBrainsMono.txt"
 
 for f in $FILES; do
   [ -f "$f" ] || { echo "missing: $f" >&2; exit 1; }

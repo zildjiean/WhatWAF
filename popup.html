@@ -1,131 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>WAF Detector</title>
-    <style>
-      :root {
-        --ok: #15803d;
-        --warn: #b45309;
-        --muted: #666;
-        --muted-strong: #444;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        width: 300px;
-        padding: 10px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 200px;
-      }
-
-      .title {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .status {
-        font-size: 16px;
-        margin-top: 4px;
-      }
-
-      #results {
-        list-style: none;
-        padding: 0;
-        margin: 10px 0 0;
-        width: 100%;
-        text-align: left;
-      }
-
-      .result {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 6px 0;
-        border-top: 1px solid #eee;
-      }
-
-      .badge {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: #1e3a8a;
-        color: #fff;
-        font-weight: bold;
-      }
-
-      .result-text {
-        min-width: 0;
-      }
-
-      .category {
-        font-size: 11px;
-        color: var(--muted);
-      }
-
-      .header-info {
-        display: block;
-        font-size: 11px;
-        color: #555;
-        word-break: break-all;
-      }
-
-      .note,
-      .meta {
-        font-size: 11px;
-        color: var(--muted);
-        margin-top: 8px;
-        word-break: break-word;
-      }
-
-      button {
-        margin-top: 10px;
-        padding: 6px 10px;
-        font-size: 14px;
-        cursor: pointer;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      button:hover {
-        background-color: #e0e0e0;
-      }
-
-      button.primary {
-        background-color: #1e40af;
-        border-color: #1e40af;
-        color: #fff;
-      }
-
-      button.primary:hover {
-        background-color: #1e3a8a;
-      }
-
-      [hidden] {
-        display: none !important;
-      }
-    </style>
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h3 class="title"><img src="icons/icon32.png" alt="" width="24" height="24" />WAF Detector</h3>
-    <div class="status" id="status" role="status" aria-live="polite">Checking...</div>
-    <ul id="results"></ul>
-    <div class="note" id="note" hidden>
-      Not finding a signature doesn't mean the site is unprotected — many WAFs hide or strip
-      their headers.
+    <header class="top">
+      <div class="brand">
+        <img src="icons/icon32.png" alt="" width="22" height="22" />
+        <span>WAF Detector</span>
+      </div>
+      <button id="retestBtn" class="icon-btn" type="button" aria-label="Run the check again" title="Run again">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M20 11a8 8 0 1 0-2.34 5.66M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="target" id="target" hidden>
+      <span class="target-dot" aria-hidden="true"></span>
+      <span class="target-label">Target</span>
+      <span class="target-host mono" id="targetHost"></span>
     </div>
-    <div class="meta" id="meta"></div>
-    <button id="allowBtn" class="primary" hidden>Allow &amp; check</button>
-    <button id="retestBtn">🔄 Retest</button>
+
+    <main id="view" role="status" aria-live="polite"></main>
+
+    <footer class="foot" id="foot" hidden>
+      <span class="meta mono" id="meta"></span>
+      <button id="copyBtn" class="ghost-btn" type="button">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <rect x="9" y="9" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span id="copyLabel">Copy report</span>
+      </button>
+    </footer>
+
+    <!-- ===== View templates ===== -->
+
+    <template id="tpl-scanning">
+      <section class="state state-scan">
+        <div class="scanner" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="scanner-shield">
+            <path d="M32 3 L58 12 V33 C58 50 47 62 32 69 C17 62 6 50 6 33 V12 Z" />
+          </svg>
+          <span class="scanner-line"></span>
+        </div>
+        <h1 class="state-title">Inspecting headers…</h1>
+        <p class="state-text">Sending one request to the site, without cookies.</p>
+      </section>
+    </template>
+
+    <template id="tpl-permission">
+      <section class="state">
+        <div class="state-icon icon-accent" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26">
+            <rect x="5" y="10.5" width="14" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h1 class="state-title">Allow access to this site?</h1>
+        <p class="state-text">
+          WAF Detector needs to read this site's response headers. Nothing is collected or sent
+          anywhere else.
+        </p>
+        <button class="primary-btn" type="button" data-action="allow">Allow &amp; check</button>
+        <p class="fineprint">Access is for this site only. You can revoke it in chrome://extensions.</p>
+      </section>
+    </template>
+
+    <template id="tpl-results">
+      <section class="results">
+        <div class="summary">
+          <span class="summary-count" data-slot="count"></span>
+          <div>
+            <div class="summary-title" data-slot="title"></div>
+            <div class="summary-kinds" data-slot="kinds"></div>
+          </div>
+        </div>
+        <ul class="cards" data-slot="cards"></ul>
+      </section>
+    </template>
+
+    <template id="tpl-card">
+      <li class="card">
+        <span class="card-badge" data-slot="badge" aria-hidden="true"></span>
+        <div class="card-body">
+          <div class="card-head">
+            <strong class="card-name" data-slot="name"></strong>
+            <span class="chip" data-slot="kind"></span>
+          </div>
+          <div class="card-cat" data-slot="category"></div>
+          <code class="card-header mono" data-slot="header"></code>
+        </div>
+      </li>
+    </template>
+
+    <template id="tpl-empty">
+      <section class="state">
+        <div class="state-icon icon-muted" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26">
+            <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M16 16l4.5 4.5M8.5 11h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h1 class="state-title">No known signature</h1>
+        <p class="state-text">
+          None of the headers match a known WAF or CDN. That doesn't mean the site is
+          unprotected. Many WAFs hide or strip their headers.
+        </p>
+      </section>
+    </template>
+
+    <template id="tpl-error">
+      <section class="state">
+        <div class="state-icon icon-warn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26">
+            <path d="M12 4 L21 19.5 H3 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            <path d="M12 10v4.5M12 17.2v.1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h1 class="state-title" data-slot="title"></h1>
+        <p class="state-text" data-slot="text"></p>
+        <button class="secondary-btn" type="button" data-action="retry" hidden>Try again</button>
+      </section>
+    </template>
 
     <script src="popup.js"></script>
   </body>

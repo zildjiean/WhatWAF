@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "WAF Detector",
-  "version": "1.4",
+  "version": "1.5",
   "description": "Identifies the WAF or CDN protecting the current website by inspecting its HTTP response headers.",
   "permissions": [
     "activeTab"

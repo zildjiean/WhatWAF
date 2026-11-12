@@ -28,6 +28,7 @@ function detect(res) {
       results.push({
         name: waf.name,
         category: waf.category,
+        color: waf.color || null,
         header: `${matchedHeader}: ${res.headers.get(matchedHeader)}`
       });
     }

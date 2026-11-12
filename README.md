@@ -24,6 +24,10 @@
   - Nothing is collected, and there are no external servers.
 - **Honest results:** CDNs are labelled "WAF not confirmed". A missing signature is reported as
   such, not as "unprotected".
+- **Copy report:** copy the URL, time, HTTP status and every match as plain text for a pentest
+  report.
+- **Readable at a glance:** each service shows its brand color, and the popup follows your
+  system's light or dark theme.
 
 ## Install
 
@@ -63,6 +67,7 @@ lowercased value. It returns the name of the header that matched, or `null`.
 {
   name: "Example WAF",
   category: "WAF",
+  color: "#1A73E8", // brand color for the badge and card accent
   match: (h) => first(has(h, "x-example-id"), contains(h, "server", "examplewaf"))
 }
 ```
@@ -87,6 +92,9 @@ WAF Detector does not collect, store or share any data. See the
 ## License
 
 [MIT](LICENSE)
+
+The bundled fonts, Instrument Sans and JetBrains Mono, are licensed under the SIL Open Font License
+1.1 (see [`fonts/`](fonts/)).
 
 All product names and trademarks are the property of their respective owners. This project is not
 affiliated with or endorsed by any of them.
