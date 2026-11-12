@@ -101,6 +101,9 @@ Host access is optional and requested at runtime, one site at a time, only when 
 
 ## หมายเหตุสำหรับ review
 
+- หน้า Store: https://chromewebstore.google.com/detail/waf-detector/pdeecpdiafdmaehnabfdaofcdhiooofa
+- ประวัติ: 1.4 เผยแพร่แล้วหลังแก้ description (2026-11-12) และส่ง 1.5 เข้า review ต่อ
+
 - เนื่องจากประกาศ `<all_urls>` (แม้จะเป็นแบบ optional) review อาจใช้เวลาหลายวัน
 - ถ้าโดน reject ให้อ่านเหตุผลในอีเมล ส่วนใหญ่แก้ได้ที่ข้อความ justification แล้วส่ง review ใหม่
 - ทุกครั้งที่อัปเดตต้องเพิ่ม `version` ใน `manifest.json` ก่อนรัน `./build.sh`

@@ -31,7 +31,10 @@
 
 ## Install
 
-**From source** (until the Chrome Web Store listing is live):
+**From the Chrome Web Store:**
+[WAF Detector](https://chromewebstore.google.com/detail/waf-detector/pdeecpdiafdmaehnabfdaofcdhiooofa)
+
+**From source:**
 
 1. Clone or download this repository.
 2. Open `chrome://extensions` and turn on **Developer mode**.
